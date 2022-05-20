@@ -1,7 +1,7 @@
 int led_red = 5;
 int led_green = 10;
 int led_white = 3;
-int leds[3] = {led_white, led_red, led_green};
+int leds[3] = {led_red, led_green, led_white};
 String gelesen = "";
 
 void setup() {
@@ -35,7 +35,7 @@ void loop() {
     digitalWrite(led_green, HIGH);
     digitalWrite(led_white, LOW);
     // Whites Led einschalten
-  } else if (gelesen == "white") {
+  } else if (gelesen == "weiß") {
     digitalWrite(led_red, LOW);
     digitalWrite(led_green, LOW);
     digitalWrite(led_white, HIGH);
@@ -94,10 +94,13 @@ void loop() {
     // Zufälliges Led einschalten
   } else if (gelesen == "zufall") {
     int gewinn = random(0,3);
+    Serial.println(gewinn);
     digitalWrite(leds[gewinn], HIGH);
-    delay(1000);
-    digitalWrite(led_white, LOW);
-    digitalWrite(led_red, LOW);
-    digitalWrite(led_green, LOW);
+    for (int i = 0; i < 3; i++) {
+      if (i != gewinn) {
+        digitalWrite(leds[i], LOW);  
+      }  
     }
+    delay(1000000);
+  }
   }
